@@ -61,10 +61,16 @@ public class Journal {
             return Collections.emptyList();
         }
 
-        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8).stream().skip(1).collect(Collectors.toList());
-        System.out.println("--- Записи дневника ---");
-        lines.forEach(System.out::println);
-        System.out.println("-----------------------");
+        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+        System.out.println("--- Результаты поиска ---"); // Изменим заголовок для наглядности
+        for (String line : lines) {
+            // Имитируем простой поиск по содержимому.
+            // Например, ищем записи, содержащие слово "тест".
+            if (line.contains("тест")) {
+                System.out.println(line);
+            }
+        }
+        System.out.println("-------------------------");
         return lines;
     }
 
