@@ -20,7 +20,7 @@ public class Journal {
 
     public static void main(String[] args) {
         if (args.length < 1) {
-            System.out.println("Использование: java -jar journal.jar [add|list] ['текст записи']");
+            System.out.println("Использование: java -jar journal.jar [add <текст> | list | search <дата>]");
             return;
         }
 
@@ -37,6 +37,13 @@ public class Journal {
                     break;
                 case "list":
                     listEntries();
+                    break;
+                case "search":
+                    if (args.length < 2) {
+                        System.out.println("Ошибка: укажите дату для поиска в формате yyyy-MM-dd");
+                        return;
+                    }
+                    searchEntries(args[1]);
                     break;
                 default:
                     System.out.println("Неизвестная команда: " + command);
@@ -66,6 +73,18 @@ public class Journal {
         lines.forEach(System.out::println);
         System.out.println("-----------------------");
         return lines;
+    }
+
+    public static void searchEntries(String dateQuery) throws IOException {
+        List<String> allEntries = listEntries();
+        List<String> found = allEntries.stream().filter(line -> line.contains("[" + dateQuery)).collect(Collectors.toList());
+
+        if (found.isEmpty()) {
+            System.out.println("Записи за дату " + dateQuery + " не найдены.");
+        } else {
+            System.out.println("Найденные записи:");
+            found.forEach(System.out::println);
+        }
     }
 
     public static void rotateLogs() {
