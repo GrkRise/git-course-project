@@ -4,11 +4,14 @@ package ru.rut.miit.git;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.nio.charset.StandardCharsets;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class JournalTest {
@@ -19,7 +22,7 @@ class JournalTest {
     void setUp() throws IOException {
         // Создаем тестовый файл с известным содержимым
         Files.deleteIfExists(journalPath);
-        Files.write(journalPath, List.of("Первая строка", "Вторая строка"));
+        Files.write(journalPath, List.of("Первая строка", "Вторая строка"), StandardCharsets.UTF_8);
     }
 
     @AfterEach
