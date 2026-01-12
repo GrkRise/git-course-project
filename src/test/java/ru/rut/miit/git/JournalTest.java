@@ -29,7 +29,6 @@ class JournalTest {
 
     @Test
     void addEntry_shouldAddLineToFile() {
-        // Этот тест будет падать из-за бага, который мы внесем
         assertDoesNotThrow(() -> Journal.addEntry("Новая тестовая запись"),
                 "Метод addEntry не должен выбрасывать исключение");
 
@@ -41,7 +40,6 @@ class JournalTest {
 
     @Test
     void listEntries_shouldReturnAllLines() throws IOException {
-        // Этот тест будет падать из-за бага со skip(1)
         List<String> lines = Journal.listEntries();
         assertEquals(2, lines.size(), "Метод listEntries должен возвращать все строки из файла");
     }
