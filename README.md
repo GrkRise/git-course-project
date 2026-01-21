@@ -1,4 +1,4 @@
-[![Java CI with Gradle](https://github.com/GrkRise/git-course-project/actions/workflows/ci.yml/badge.svg)](https://github.com/GrkRise/git-course-project/actions/workflows/ci.yml)
+[![Java CI with Gradle](https://github.com/AntonovKirill2005/git-course-project/actions/workflows/ci.yml/badge.svg)](https://github.com/AntonovKirill2005/git-course-project/actions/workflows/ci.yml)
 
 # Project Chronicle
 CLI-утилита для логирования действий.
