@@ -30,3 +30,10 @@ jar {
         attributes 'Main-Class': 'ru.rut.miit.git.Journal'
     }
 }
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(JavaExec) {
+    systemProperty 'file.encoding', 'UTF-8'
+}
