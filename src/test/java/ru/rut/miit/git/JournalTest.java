@@ -45,4 +45,12 @@ class JournalTest {
         List<String> lines = Journal.listEntries();
         assertEquals(2, lines.size(), "Метод listEntries должен возвращать все строки из файла");
     }
+    @Test
+    void searchEntries_shouldReturnMatchingLines() throws IOException {
+        List<String> result = Journal.searchEntries("Вторая");
+
+        assertEquals(1, result.size(), "Должна быть найдена одна строка");
+        assertEquals("Вторая строка", result.get(0),
+                "Найденная строка должна соответствовать поисковому запросу");
+    }
 }
