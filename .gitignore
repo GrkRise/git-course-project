@@ -8,6 +8,7 @@ build/
 *.ipr
 *.iws
 out/
+api_keys.json
 
 # Log files
 *.log
