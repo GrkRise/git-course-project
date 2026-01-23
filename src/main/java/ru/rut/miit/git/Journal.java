@@ -38,13 +38,20 @@ public class Journal {
                 case "list":
                     listEntries();
                     break;
+                case "search":
+                    if (args.length < 2) {
+                        System.out.println("Ошибка: укажите дату для поиска в формате yyyy-MM-dd");
+                        return;
+                    }
+                    searchEntries(args[1]);
+                    break;
+
                 default:
                     System.out.println("Неизвестная команда: " + command);
             }
         } catch (IOException e) {
             System.err.println("Произошла ошибка ввода-вывода: " + e.getMessage());
         }
-        rotateLogs();
     }
 
     public static void addEntry(String text) throws IOException {
@@ -61,16 +68,23 @@ public class Journal {
             return Collections.emptyList();
         }
 
-        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8).stream().collect(Collectors.toList());
+        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
         System.out.println("--- Записи дневника ---");
         lines.forEach(System.out::println);
         System.out.println("-----------------------");
         return lines;
     }
+            public static void searchEntries(String dateQuery) throws IOException {
+            List<String> allEntries = listEntries();
+            List<String> found = allEntries.stream()
+                    .filter(line -> line.contains("[" + dateQuery + "]"))
+                    .collect(Collectors.toList());
 
-    public static void rotateLogs() {
-        // В реальном приложении здесь была бы логика проверки размера файла.
-        // Для нашего задания достаточно симулировать действие.
-        System.out.println("[INFO] Log rotation check complete.");
+            if (found.isEmpty()) {
+                System.out.println("Записи за дату " + dateQuery + " не найдены.");
+            } else {
+                System.out.println("Найденные записи:");
+                found.forEach(System.out::println);
+            }
+        }
     }
-}
