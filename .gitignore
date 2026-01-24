@@ -20,3 +20,7 @@ Thumbs.db
 journal.txt
 
 api_keys.json
+
+/build/
+
+**/build/reports/
