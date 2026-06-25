@@ -85,7 +85,7 @@ public class Journal {
 
     public static void rotateLogs() {
         // В реальном приложении здесь была бы логика проверки размера файла.
-        // Для нашего задания достаточно симулировать действие.
+        // Для нашего задания достаточно симулировать действие .
         System.out.println("[INFO] Log rotation check complete.");
     }
 }
