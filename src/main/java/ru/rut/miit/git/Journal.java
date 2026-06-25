@@ -61,10 +61,25 @@ public class Journal {
             return Collections.emptyList();
         }
 
-        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8).stream().collect(Collectors.toList());
+        // Читаем файл ОДИН раз и сохраняем в переменную lines
+        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+
+        // 1. Сначала выводим все записи (твой код слева)
         System.out.println("--- Записи дневника ---");
         lines.forEach(System.out::println);
         System.out.println("-----------------------");
+
+        // 2. Затем делаем поиск (код справа)
+        System.out.println("--- Результаты поиска ---");
+        for (String line : lines) {
+            // Имитируем простой поиск по содержимому.
+            // Например, ищем записи, содержащие слово "тест".
+            if (line.contains("тест")) {
+                System.out.println(line);
+            }
+        }
+        System.out.println("-------------------------");
+
         return lines;
     }
 
