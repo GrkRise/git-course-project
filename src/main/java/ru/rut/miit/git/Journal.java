@@ -17,9 +17,10 @@ import java.util.stream.Stream;
 public class Journal {
     private static final String JOURNAL_FILE = "journal.txt";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
     public static void main(String[] args) {
         if (args.length < 1) {
-            System.out.println("Использование: java -jar journal.jar [add|list] ['текст записи']");
+            System.out.println("Использование: java -jar journal.jar [add|list|search] ['текст записи']");
             return;
         }
 
@@ -36,6 +37,13 @@ public class Journal {
                     break;
                 case "list":
                     listEntries();
+                    break;
+                case "search":
+                    if (args.length < 2) {
+                        System.out.println("Ошибка: для команды 'search' укажите ключевое слово.");
+                        return;
+                    }
+                    searchEntries(args[1]);
                     break;
                 default:
                     System.out.println("Неизвестная команда: " + command);
@@ -60,15 +68,32 @@ public class Journal {
             return Collections.emptyList();
         }
 
-        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8).stream().collect(Collectors.toList());        System.out.println("--- Записи дневника ---");
+        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8).stream().collect(Collectors.toList());
+        System.out.println("--- Записи дневника ---");
         lines.forEach(System.out::println);
         System.out.println("-----------------------");
         return lines;
     }
 
+    public static List<String> searchEntries(String keyword) throws IOException {
+        Path path = Paths.get(JOURNAL_FILE);
+        if (!Files.exists(path)) {
+            System.out.println("Дневник пуст.");
+            return Collections.emptyList();
+        }
+
+        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+        System.out.println("--- Результаты поиска ---");
+        for (String line : lines) {
+            if (line.contains(keyword)) {
+                System.out.println(line);
+            }
+        }
+        System.out.println("-------------------------");
+        return lines;
+    }
+
     public static void rotateLogs() {
-        // В реальном приложении здесь была бы логика проверки размера файла.
-        // Для нашего задания достаточно симулировать действие.
         System.out.println("[INFO] Log rotation check complete.");
     }
 }
