@@ -16,8 +16,7 @@ import java.util.stream.Stream;
 
 public class Journal {
     private static final String JOURNAL_FILE = "journal.txt";
-    private static final DateTimaFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     public static void main(String[] args) {
         if (args.length < 1) {
             System.out.println("Использование: java -jar journal.jar [add|list] ['текст записи']");
@@ -60,8 +59,7 @@ public class Journal {
             return Collections.emptyList();
         }
 
-        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8).stream().skip(1).collect(Collectors.toList());
-        System.out.println("--- Записи дневника ---");
+        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8).stream().collect(Collectors.toList());        System.out.println("--- Записи дневника ---");
         lines.forEach(System.out::println);
         System.out.println("-----------------------");
         return lines;
