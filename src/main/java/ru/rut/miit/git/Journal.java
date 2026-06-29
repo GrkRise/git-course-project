@@ -1,6 +1,7 @@
 // Journal.java
 package ru.rut.miit.git;
 
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -16,7 +17,7 @@ import java.util.stream.Stream;
 
 public class Journal {
     private static final String JOURNAL_FILE = "journal.txt";
-    private static final DateTimaFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public static void main(String[] args) {
         if (args.length < 1) {
@@ -32,7 +33,7 @@ public class Journal {
                         System.out.println("Ошибка: для команды 'add' нужен текст записи.");
                         return;
                     }
-                    String text = Stream.of(args).skip(1).collect(Collectors.joining(" "));
+                    String text = Stream.of(args).collect(Collectors.joining(" "));
                     addEntry(text);
                     break;
                 case "list":
@@ -60,7 +61,7 @@ public class Journal {
             return Collections.emptyList();
         }
 
-        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8).stream().skip(1).collect(Collectors.toList());
+        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
         System.out.println("--- Записи дневника ---");
         lines.forEach(System.out::println);
         System.out.println("-----------------------");
